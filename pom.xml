@@ -1,0 +1,20 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>com.cx</groupId>
+  <artifactId>dubbo-engine-login</artifactId>
+  <version>1.0.0</version>
+  <packaging>pom</packaging>
+
+  <name>dubbo-engine-login</name>
+  <description>底层服务-登陆引擎</description>
+  <url>http://maven.apache.org</url>
+
+   <modules>
+        <module>login-engine-api</module>
+        <module>login-engine</module>
+   </modules>
+    
+    
+</project>
