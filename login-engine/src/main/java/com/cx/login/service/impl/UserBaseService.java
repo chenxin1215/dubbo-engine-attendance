@@ -18,21 +18,18 @@ public class UserBaseService implements UserService {
 
     @Override
     public UserBase queryUserById(Long userId) {
-        // TODO Auto-generated method stub
         UserBase userBase = userBaseMapper.selectByPrimaryKey(userId);
         return userBase;
     }
 
     @Override
     public UserBase queryUserByMobile(String mobile) {
-        // TODO Auto-generated method stub
         UserBase userBase = userBaseMapper.queryUserByMobile(mobile);
         return userBase;
     }
 
     @Override
     public UserBase queryUserByUserName(String userName) {
-        // TODO Auto-generated method stub
         UserBase userBase = userBaseMapper.queryUserByUserName(userName);
         return userBase;
     }
@@ -40,13 +37,16 @@ public class UserBaseService implements UserService {
     @Override
     public LoginStatusEnum userLogin(UserBase userBase) {
         UserBase result = userBaseMapper.queryUserByUserName(userBase.getUserName());
+        System.out.println("登陆用户：:" + userBase.toString());
         if (result == null) {
             return LoginStatusEnum.ACCOUNT_NULL;
         } else if (result.getUserStatus() == -1) {
             return LoginStatusEnum.ACCOUNT_DISABLE;
-        } else if (result.getPassword() == userBase.getPassword()) {
+        } else if (result.getPassword().equals(userBase.getPassword())) {
+            System.out.println("查询用户：:" + result.toString());
             return LoginStatusEnum.LOGIN_SUCCESS;
-        } else if (result.getPassword() != userBase.getPassword()) {
+        } else if (!result.getPassword().equals(userBase.getPassword())) {
+            System.out.println("查询用户：:" + result.toString());
             return LoginStatusEnum.PWD_ERROR;
         } else {
             return LoginStatusEnum.SYS_ERROR;
@@ -55,7 +55,6 @@ public class UserBaseService implements UserService {
 
     @Override
     public UserBase queryUserByNickName(String nickName) {
-        // TODO Auto-generated method stub
         UserBase userBase = userBaseMapper.queryUserByNickName(nickName);
         return userBase;
     }
@@ -67,20 +66,18 @@ public class UserBaseService implements UserService {
 
     @Override
     public Long saveUser(UserBase model) {
-        // TODO Auto-generated method stub
+        model.setPassword("123456");
         Long id = (long)userBaseMapper.insertSelective(model);
         return id;
     }
 
     @Override
     public void deleteUser(Long userId) {
-        // TODO Auto-generated method stub
         userBaseMapper.deleteByPrimaryKey(userId);
     }
 
     @Override
     public void resetPassword(String encode, Long userId) {
-        // TODO Auto-generated method stub
         UserBase userBase = new UserBase();
         userBase.setPassword(encode);
         userBase.setUserId(userId);
@@ -89,7 +86,6 @@ public class UserBaseService implements UserService {
 
     @Override
     public List<UserBase> getAllUserList() {
-        // TODO Auto-generated method stub
         List<UserBase> result = userBaseMapper.getAllUserList();
         return result;
     }

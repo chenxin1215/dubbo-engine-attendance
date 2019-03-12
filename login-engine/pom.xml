@@ -116,4 +116,17 @@
         <version>2.8.0</version>
     </dependency>
   </dependencies>
+  
+  <build>
+     <!--用于打成jar包的名字-->
+    <finalName>login-engine</finalName>
+    <plugins>
+       <!--用于启动springBoot的插件-->
+        <plugin>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-maven-plugin</artifactId>
+        </plugin>
+    </plugins>
+  </build>
+  
 </project>
