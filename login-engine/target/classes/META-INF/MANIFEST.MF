@@ -2,7 +2,7 @@ Manifest-Version: 1.0
 Implementation-Title: login-engine
 Implementation-Version: 1.0.0
 Built-By: cx
-Implementation-Vendor-Id: com.cx
+Implementation-Vendor-Id: com.cx.engine
 Build-Jdk: 1.8.0_201
 Implementation-URL: http://maven.apache.org
 Created-By: Maven Integration for Eclipse

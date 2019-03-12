@@ -14,8 +14,6 @@
    <modules>
         <module>login-engine-api</module>
         <module>login-engine</module>
-       <module>login-engine</module>
-       <module>login-engine</module>
    </modules>
     
     
