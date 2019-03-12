@@ -1,0 +1,38 @@
+spring:
+  profiles:
+    active: dev
+  datasource:
+    name: dubbo_engine
+    username: ${database.username}
+    password: ${database.password}
+    url: jdbc:mysql://${database.host}:${database.port}/${database.dbname}?characterEncoding=utf-8&useSSL=false
+    type: com.zaxxer.hikari.HikariDataSource
+    hikari:
+      connection-timeout: 10000
+      idle-timeout: 600000
+      max-lifetime: 3600000
+#server: 
+#  port: 9090
+mybatis:
+  mapper-locations:
+  - classpath:com/cx/login/dao/*.xml
+  type-aliases-package: com.cx.login.entity
+dubbo:
+  application:
+    id: dubbo-login-provider
+    name: dubbo-login-provider
+  protocol:
+    id: dubbo
+    name: dubbo
+    port: 12345
+    status: server
+  registry:
+    id: cx-registry
+  scan:
+    base-packages: 
+    - com.cx.login.service
+  consumer:
+    check: false
+    timeout: 5000
+    
+
