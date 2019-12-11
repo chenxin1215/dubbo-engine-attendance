@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.attendance.dao.AttendanceInfoMapper">
+    <resultMap id="BaseResultMap" type="com.xx.attendance.entity.AttendanceInfo">
+        <id column="attendance_id" jdbcType="BIGINT" property="attendanceId"/>
+        <result column="employee_id" jdbcType="BIGINT" property="employeeId"/>
+        <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
+        <result column="punch_in_time" jdbcType="TIMESTAMP" property="punchInTime"/>
+        <result column="punch_in_state" jdbcType="INTEGER" property="punchInState"/>
+        <result column="punch_out_time" jdbcType="TIMESTAMP" property="punchOutTime"/>
+        <result column="punch_out_state" jdbcType="INTEGER" property="punchOutState"/>
+        <result column="record_year" jdbcType="INTEGER" property="recordYear"/>
+        <result column="record_month" jdbcType="INTEGER" property="recordMonth"/>
+        <result column="record_day" jdbcType="INTEGER" property="recordDay"/>
+        <result column="state" jdbcType="INTEGER" property="state"/>
+        <result column="late_sign" jdbcType="BIT" property="lateSign"/>
+        <result column="early_sign" jdbcType="BIT" property="earlySign"/>
+        <result column="work_time" jdbcType="INTEGER" property="workTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        attendance_id, employee_id, employee_name, punch_in_time, punch_in_state, punch_out_time,
+        punch_out_state, record_year, record_month, record_day, `state`, late_sign, early_sign,
+        work_time, create_time, update_time
+    </sql>
+
+    <select id="queryAttendanceByParam" resultMap="BaseResultMap">
+        SELECT
+        <include refid="Base_Column_List"></include>
+        FROM attendance_info
+        <where>
+            <if test="recordYear != null">
+                and record_year = #{recordYear}
+            </if>
+            <if test="recordMonth != null">
+                and record_month = #{recordMonth}
+            </if>
+            <if test="recordDay != null">
+                and record_day = #{recordDay}
+            </if>
+            <if test="employeeId != null">
+                and employee_id = #{employeeId}
+            </if>
+        </where>
+    </select>
+
+</mapper>

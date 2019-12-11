@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.attendance.dao.ConfigureInfoMapper">
+    <resultMap id="BaseResultMap" type="com.xx.attendance.entity.ConfigureInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="work_hours" jdbcType="TIME" property="workHours"/>
+        <result column="ow_hours" jdbcType="TIME" property="owHours"/>
+        <result column="break_type" jdbcType="INTEGER" property="breakType"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+    id, work_hours, ow_hours, break_type, create_time, update_time
+    </sql>
+
+</mapper>

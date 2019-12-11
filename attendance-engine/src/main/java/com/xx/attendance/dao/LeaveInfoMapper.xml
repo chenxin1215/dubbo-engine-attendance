@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.attendance.dao.LeaveInfoMapper">
+    <resultMap id="BaseResultMap" type="com.xx.attendance.entity.LeaveInfo">
+        <id column="id" jdbcType="BIGINT" property="id"/>
+        <result column="employee_id" jdbcType="BIGINT" property="employeeId"/>
+        <result column="employee_sn" jdbcType="VARCHAR" property="employeeSn"/>
+        <result column="leave_reason" jdbcType="VARCHAR" property="leaveReason"/>
+        <result column="start_date" jdbcType="DATE" property="startDate"/>
+        <result column="end_date" jdbcType="DATE" property="endDate"/>
+        <result column="approve_user_id" jdbcType="BIGINT" property="approveUserId"/>
+        <result column="approve_time" jdbcType="TIMESTAMP" property="approveTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+    id, employee_id, employee_sn, leave_reason, start_date, end_date, approvel_state,
+    approve_user_id, approve_time, create_time, update_time
+    </sql>
+
+    <select id="queryLeaveListByParam" resultMap="BaseResultMap">
+        select * from leave_info lea
+        join employee_info employee on lea.employee_id = employee.employee_id
+        <where>
+            <if test="employeeId != null">
+                and lea.employee_id = #{employeeId}
+            </if>
+            <if test="keyword != null">
+                and (
+                employee.employee_sn like concat('%',#{keyword},'%')
+                or employee.employee_name like concat('%',#{keyword},'%')
+                )
+            </if>
+            <if test="startDate != null and endDate != null">
+                and (
+                lea.start_date <![CDATA[>=]]> #{startDate}
+                and lea.end_date <![CDATA[<=]]> #{endDate}
+                )
+            </if>
+        </where>
+    </select>
+
+</mapper>

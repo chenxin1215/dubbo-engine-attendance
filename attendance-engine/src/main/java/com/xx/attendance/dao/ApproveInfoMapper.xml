@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.xx.attendance.dao.ApproveInfoMapper">
+    <resultMap id="BaseResultMap1" type="com.xx.attendance.entity.ApproveInfo">
+        <id column="approve_id" jdbcType="BIGINT" property="approveId"/>
+        <result column="employee_id" jdbcType="BIGINT" property="employeeId"/>
+        <result column="employee_name" jdbcType="VARCHAR" property="employeeName"/>
+        <result column="approve_type" jdbcType="INTEGER" property="approveType"/>
+        <result column="leave_id" jdbcType="BIGINT" property="leaveId"/>
+        <result column="overtime_id" jdbcType="BIGINT" property="overtimeId"/>
+        <result column="start_date" jdbcType="DATE" property="startDate"/>
+        <result column="end_date" jdbcType="DATE" property="endDate"/>
+        <result column="approve_user_id" jdbcType="BIGINT" property="approveUserId"/>
+        <result column="approve_reason" jdbcType="VARCHAR" property="approveReason"/>
+        <result column="approve_state" jdbcType="INTEGER" property="approveState"/>
+        <result column="approve_person" jdbcType="VARCHAR" property="approvePerson"/>
+        <result column="approve_time" jdbcType="TIMESTAMP" property="approveTime"/>
+        <result column="create_time" jdbcType="TIMESTAMP" property="createTime"/>
+        <result column="update_time" jdbcType="TIMESTAMP" property="updateTime"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        approve_id, employee_id, employee_name, approve_type, leave_id, overtime_id, start_date,
+        end_date, approve_user_id, approve_reason, approve_state, approve_person, approve_time, create_time,
+        update_time
+    </sql>
+
+    <sql id="Page_Query">
+        <if test="page != null and pageSize != null">
+            limit #{offset}, #{pageSize}
+        </if>
+    </sql>
+
+    <select id="queryApprovalListByParam" resultMap="BaseResultMap1">
+        select * from approve_info
+        <where>
+            <if test="approvalUserId != null">
+                and employee_id = #{approvalUserId}
+            </if>
+            <if test="approvalType != null">
+                and approve_type = #{approvalType}
+            </if>
+            <if test="startDate != null and endDate != null">
+                and (
+                create_time <![CDATA[>=]]> #{startDate}
+                and create_time <![CDATA[<=]]> #{endDate}
+                )
+            </if>
+        </where>
+        order by create_time desc
+        <include refid="Page_Query"></include>
+    </select>
+
+</mapper>
