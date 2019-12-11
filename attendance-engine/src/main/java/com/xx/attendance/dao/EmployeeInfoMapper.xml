@@ -8,7 +8,7 @@
         <result column="age" jdbcType="INTEGER" property="age"/>
         <result column="sex" jdbcType="INTEGER" property="sex"/>
         <result column="enter_date" jdbcType="DATE" property="enterDate"/>
-        <result column="employee_position" jdbcType="INTEGER" property="employeePosition"/>
+        <result column="position" jdbcType="INTEGER" property="position"/>
         <result column="employee_type" jdbcType="INTEGER" property="employeeType"/>
         <result column="password" jdbcType="VARCHAR" property="password"/>
         <result column="tel" jdbcType="VARCHAR" property="tel"/>
@@ -18,7 +18,7 @@
     </resultMap>
 
     <sql id="Base_Column_List">
-    employee_id, employee_sn, employee_name, age, sex, enter_date, employee_position, employee_type,
+    employee_id, employee_sn, employee_name, age, sex, enter_date, `position`, employee_type,
     `password`, tel, `state`, create_time, update_time
     </sql>
 
@@ -39,8 +39,8 @@
         <if test="state != null">
             and state = #{state}
         </if>
-        <if test="employeePosition != null">
-            and 'employee_position' = #{employeePosition}
+        <if test="position != null">
+            and 'position' = #{position}
         </if>
         <if test="enterDateStart != null and enterDateEnd != null">
             and (

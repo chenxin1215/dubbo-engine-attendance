@@ -10,10 +10,11 @@ public enum EmployeeStateEnum {
 
     private int value;
 
-    private static final EnumMap<EmployeeStateEnum, String> TEXT_MAP = new EnumMap<EmployeeStateEnum, String>(EmployeeStateEnum.class);
+    private static final EnumMap<EmployeeStateEnum, String> TEXT_MAP =
+        new EnumMap<EmployeeStateEnum, String>(EmployeeStateEnum.class);
     static {
-        TEXT_MAP.put(EmployeeStateEnum.ONJOB, "普通员工");
-        TEXT_MAP.put(EmployeeStateEnum.QUITJOB, "管理员");
+        TEXT_MAP.put(EmployeeStateEnum.ONJOB, "在职");
+        TEXT_MAP.put(EmployeeStateEnum.QUITJOB, "离职");
     }
 
     EmployeeStateEnum(int value) {

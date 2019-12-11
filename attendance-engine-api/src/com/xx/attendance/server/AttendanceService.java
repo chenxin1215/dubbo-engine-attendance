@@ -5,6 +5,7 @@ import com.xx.attendance.dto.response.attendance.AttendanceDetail;
 import com.xx.attendance.dto.response.attendance.AttendanceMonthInfo;
 import com.xx.attendance.dto.view.SimpleView;
 import com.xx.attendance.entity.AttendanceInfo;
+import com.xx.attendance.entity.MonthStatistics;
 
 import java.util.List;
 
@@ -51,4 +52,6 @@ public interface AttendanceService {
     Integer generateMonthAttendanceInfo(QueryAttendanceInfoParam param, Long operationUserId);
 
     Long insertAttendance(AttendanceInfo attendanceInfo);
+
+    MonthStatistics getMonthStatisticsById(Long id);
 }

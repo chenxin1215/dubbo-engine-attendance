@@ -46,7 +46,7 @@ public class EmployeeInfo implements Serializable {
     /**
      * 职位 1-CEO 2-总监 3-主管 4-普通员工
      */
-    private Integer employeePosition;
+    private Integer position;
 
     /**
      * 员工类型 1：普通员工；2：管理员
@@ -164,12 +164,12 @@ public class EmployeeInfo implements Serializable {
         this.enterDate = enterDate;
     }
 
-    public Integer getEmployeePosition() {
-        return employeePosition;
+    public Integer getPosition() {
+        return position;
     }
 
-    public void setEmployeePosition(Integer employeePosition) {
-        this.employeePosition = employeePosition;
+    public void setPosition(Integer position) {
+        this.position = position;
     }
 
     /**

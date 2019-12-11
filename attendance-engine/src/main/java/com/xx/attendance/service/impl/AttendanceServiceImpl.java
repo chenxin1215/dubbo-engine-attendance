@@ -344,7 +344,7 @@ public class AttendanceServiceImpl implements AttendanceService {
             BeanUtils.copyProperties(statistics, data);
             data.setAverageWorkingHours(statistics.getWorkTime().floatValue() / statistics.getWorkDay().floatValue());
             EmployeeInfo employeeInfo = employeeInfoMapper.selectById(statistics.getEmployeeId());
-            data.setPosition(PositionTypeEnum.parse(employeeInfo.getEmployeePosition()).toString());
+            data.setPosition(PositionTypeEnum.parse(employeeInfo.getPosition()).toString());
             dataList.add(data);
         }
         return dataList;
@@ -506,5 +506,11 @@ public class AttendanceServiceImpl implements AttendanceService {
     public Long insertAttendance(AttendanceInfo attendanceInfo) {
         attendanceInfoMapper.insert(attendanceInfo);
         return attendanceInfo.getAttendanceId();
+    }
+
+    @Override
+    public MonthStatistics getMonthStatisticsById(Long id) {
+        MonthStatistics monthStatistics = monthStatisticsMapper.selectById(id);
+        return monthStatistics;
     }
 }

@@ -44,7 +44,7 @@ public class EmployeeServiceImpl implements EmployeeService {
             EmployeeDetail detail = new EmployeeDetail();
             BeanUtils.copyProperties(employeeInfo, detail);
             detail.setEnterDateStr(DateUtil.dateToString(employeeInfo.getEnterDate(), DateUtil.DATE_BASE));
-            detail.setPositionStr(PositionTypeEnum.parse(employeeInfo.getEmployeePosition()).toString());
+            detail.setPositionStr(PositionTypeEnum.parse(employeeInfo.getPosition()).toString());
             detail.setEmployeeTypeStr(EmployeeTypeEnum.parse(employeeInfo.getEmployeeType()).toString());
             detail.setStateStr(EmployeeStateEnum.parse(employeeInfo.getState()).toString());
 
@@ -70,13 +70,16 @@ public class EmployeeServiceImpl implements EmployeeService {
 
         // 获取员工基本信息
         EmployeeInfo employeeInfo = employeeInfoMapper.selectById(employeeId);
+        if (employeeInfo == null) {
+            return null;
+        }
 
         // 组装员工信息
         EmployeeDetail employeeDetail = new EmployeeDetail();
         // 复制类
         BeanUtils.copyProperties(employeeInfo, employeeDetail);
         // 职务
-        employeeDetail.setPositionStr(PositionTypeEnum.parse(employeeInfo.getEmployeePosition()).toString());
+        employeeDetail.setPositionStr(PositionTypeEnum.parse(employeeInfo.getPosition()).toString());
         // 入职日期
         employeeDetail.setEnterDateStr(DateUtil.dateToString(employeeInfo.getEnterDate(), DateUtil.DATE_BASE));
         // 员工身份
@@ -104,6 +107,7 @@ public class EmployeeServiceImpl implements EmployeeService {
         employeeInfo.setEmployeeSn(SnUtil.createEmployeeSn(this.getNewEmployeeSn()));
         employeeInfo.setPassword("123456");
         employeeInfo.setState(EmployeeStateEnum.ONJOB.value());
+        employeeInfo.setEnterDate(DateUtil.stringToDate(request.getEnterDate(), DateUtil.DATE_BASE));
         employeeInfoMapper.insert(employeeInfo);
         return employeeInfo.getEmployeeId();
     }
